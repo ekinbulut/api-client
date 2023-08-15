@@ -5,36 +5,26 @@ namespace requester;
 
 public class Requester
 {
-    private readonly string _url;
-    private readonly string _accessToken;
-    private readonly string _username, _password;
-
     private readonly RestClientOptions _options;
     
     public Requester(string url)
     {
-        _url = url;
-        _options = new RestClientOptions(_url);
+        _options = new RestClientOptions(url);
     }
 
     public Requester(string url, string accessToken)
     {
-        _url = url;
-        _accessToken = accessToken;
-        _options = new RestClientOptions(_url)
+        _options = new RestClientOptions(url)
         {
-            Authenticator = new JwtAuthenticator(_accessToken)
+            Authenticator = new JwtAuthenticator(accessToken)
         };
     }
     
     public Requester(string url, string username, string password)
     {
-        _url = url;
-        _username = username;
-        _password = password;
-        _options = new RestClientOptions(_url)
+        _options = new RestClientOptions(url)
         {
-            Authenticator = new HttpBasicAuthenticator(_username, _password)
+            Authenticator = new HttpBasicAuthenticator(username, password)
         };
 
     }
