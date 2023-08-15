@@ -43,8 +43,8 @@ public class Requester
     {
         var client = new RestClient(_options);
         var request = new RestRequest(resource, httpMethod);
-        var result = client.Get<T>(request);
-        return result;
+        var result = client.Execute<T>(request);
+        return result.Data;
     }
 
 
@@ -52,8 +52,8 @@ public class Requester
     {
         var client = new RestClient(_options);
         var request = new RestRequest(resource, httpMethod);
-        var response = await client.GetAsync<T>(request, cancellationToken);
-        var result = response;
+        var response = await client.ExecuteAsync<T>(request, cancellationToken);
+        var result = response.Data;
         return result;
     }
 }
